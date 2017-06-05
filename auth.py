@@ -5,7 +5,7 @@ from struct import *
 
 from pymongo import MongoClient
 
-SECRET_KEY = "geheimnisDesGrauens"
+SecretKey = "geheimnisDesGrauens"
 mongoUrl = "mongodb://localhost:27017/friendscomm"
 
 def log(string):
@@ -28,18 +28,17 @@ def to_ejabberd(bool):
     sys.stdout.flush()
 
 def auth(username, server, password):
-	auth_token = password
-	nickname = get_nickname(auth_token)
+	nickname = get_nickname(password)
 	log('doing auth for:' + nickame)
 	client = MongoClient(mongoUrl)
 	collection = client.users
-	result = str(client.user.find_one({"Nickname":nickname}))
+	result = str(collection.find_one({"nickname":nickname}))
 	comp = str('None')
 	if result == comp:
-		log('access granted')
+		log('access denied invalid user')
 		return False
 	else:
-		log('access denied invalid user')
+		log('access granted')
 		return True 
 
 def isuser(username, server):
@@ -52,7 +51,7 @@ def setpass(username, server, password):
 
 def get_nickname(auth_token):
     try:
-        payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
+        payload = jwt.decode(auth_token, app.config.get(SecretKey))
         return payload['nickname']
     except jwt.ExpiredSignatureError:
 		log('Signature expired.')
