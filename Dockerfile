@@ -1,15 +1,15 @@
 FROM rroemhild/ejabberd
 
 
-ADD /authNikolai.py /opt/ejabberd/scripts/lib/auth_mysql.py
+ADD /extauth/auth.py /opt/ejabberd/scripts/lib/auth_mysql.py
 
-COPY /friendscomm.yml.sample /etc/friendscomm.yml.sample
+ADD /friendscomm.yml /etc/friendscomm.yml
 
 USER root
 
-#RUN apt-get update -y && apt-get install -y python-pip
-#Run apt-get install -y gcc python-dev
-#RUN python -m pip install pymongo==2.7
+RUN apt-get update -y && apt-get install -y python-pip
+Run apt-get install -y gcc python-dev
+RUN python -m pip install pymongo==2.7
 
 
 USER ejabberd
