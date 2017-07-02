@@ -15,4 +15,4 @@ RUN python -m pip install pymongo==2.7
 USER ejabberd
 
 #öffnet Container-Ports für Kommunikation in der Docker-Bridge zwischen Container. Aus Container raus z.B. Internet oder Host sollte ohne weitere Einstellungen möglich sein. Wenn ein Container-Applikation auf einem Port horscht, dann müüsen anfragen von außerhalb an den Host-Port an den Container-Port weitergeleitet werden über "-p containerPort:HostPort" (oder andersrum) 
-EXPOSE 80 27017
+#EXPOSE 80 27017
