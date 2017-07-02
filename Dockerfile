@@ -10,6 +10,10 @@ USER root
 RUN apt-get update -y && apt-get install -y python-pip
 Run apt-get install -y gcc python-dev
 RUN python -m pip install pymongo==2.7
+RUN python -m pip install pyjwt==2.7
+#RUN python -m pip install pyyaml
+RUN mkdir /var/log/ejabberd
+RUN chown ejabberd:ejabberd /var/log/ejabberd
 
 
 USER ejabberd
