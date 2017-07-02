@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Setup
 
 import sys, logging, struct, jwt, yaml
