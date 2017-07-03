@@ -20,3 +20,8 @@ docker run --name "ejabberd" \
 -e "TZ=Europe/Berlin" \
 tinf15itns/ejabberd:v1
 ```
+
+# Look inside the container
+```bash
+docker exec -t -it ejabberd /bin/bash
+```
