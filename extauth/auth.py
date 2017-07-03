@@ -7,7 +7,7 @@ import sys, logging, struct, jwt, yaml
 from pymongo import MongoClient
 
 sys.stderr = open('/var/log/ejabberd/extauth_err.log', 'a')
-logging.basicConfig(level=logging.INFO,
+logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
                     filename='/var/log/ejabberd/extauth.log',
                     filemode='a')
@@ -31,7 +31,7 @@ class EjabberdInputError(Exception):
 # Declarations
 
 def ejabberd_in():
-    logging.debug("trying ti read 2 bytes from ejabberd:")
+    logging.debug("trying to read 2 bytes from ejabberd:")
     input_length = sys.stdin.read(2)
 
     if len(input_length) is not 2:
@@ -74,12 +74,14 @@ def get_nickname(token):
 
     nickname = payload['nickname']
     logging.debug('Extracted nickname: %s' %nickname)
+    return nickname
 
 def auth(username, server, password):
     logging.debug('Attempting Authentication')
     nickname = get_nickname(password)
 
-    result = db.find_one({"nickname":nickname}).count()
+    result = db.find({"nickname":nickname}).count()
+    logging.debug("Result lookup: %i" %result)
     if result == 1:
         logging.debug('Authenticated, return True')
         return True
