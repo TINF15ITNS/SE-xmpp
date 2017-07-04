@@ -20,6 +20,18 @@ docker run --name "ejabberd" \
 -e "TZ=Europe/Berlin" \
 tinf15itns/ejabberd:v1
 ```
+***new version:***
+```bash
+docker run --name "ejabberd" \
+-p 5222:5222 \
+-p 5269:5269 \
+-p 5280:5280 \
+-h 'localhost' \
+-e "XMPP_DOMAIN=localhost" \
+-e "TZ=Europe/Berlin" \
+--env-file env.list
+tinf15itns/ejabberd:v1
+```
 
 # Look inside the container
 ```bash

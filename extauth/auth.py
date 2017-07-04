@@ -78,19 +78,28 @@ def get_nickname(token):
 
 def auth(username, server, password):
     logging.debug('Attempting Authentication')
-    nickname = get_nickname(password)
+    token_nickname = get_nickname(password)
 
-    result = db.find({"nickname":nickname}).count()
+    if token_nickname != username:
+        logging.debug('Authentication denied, Username - Token mismatch')
+        return False
+
+    result = db.find({"nickname":token_nickname}).count()
     logging.debug("Result lookup: %i" %result)
     if result == 1:
         logging.debug('Authenticated, return True')
         return True
     else:
-        logging.debug('Authentication denied')
+        logging.debug('Authentication denied, nickname not found in database')
         return False
 
 def isuser(username, server):
-    return True
+    logging.debug('looking for user')
+    result = db.find({"nickname": username}).count()
+    if result == 1:
+        return True
+    else:
+        return False
 
 def setpass(username, server, password):
     return True
