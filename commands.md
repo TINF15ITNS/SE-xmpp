@@ -11,7 +11,6 @@ docker run --name "ejabberd" \
 -p 5269:5269 \
 -p 5280:5280 \
 -v ~/ssl:/opt/ejabberd/ssl \
--v /var/log/friendscomm/ejabberd:/var/log/ejabberd \
 -h 'localhost' \
 -e "XMPP_DOMAIN=localhost" \
 -e "TZ=Europe/Berlin" \
